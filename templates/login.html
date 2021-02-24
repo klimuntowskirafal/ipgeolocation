@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<br/>
+<br/>
+
+<div class="row">
+
+    <div class="col-sm-6 col-sm-offset-3">
+
+        <form class="border border-light p-5" method="POST">
+            {% csrf_token %}
+
+<!--            <fieldset class="form-group">-->
+<!--				<legend class="boarder-bottom sm-4">Zaloguj się by kontynuować</legend>-->
+<!--                <div class="form-group">-->
+<!--                  <label for="usr">Nazwa użytkownika:</label>-->
+<!--                  <input type="text" class="form-control" name="username" id="usr">-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                  <label for="pwd">Hasło:</label>-->
+<!--                  <input type="password" class="form-control" name="password" id="pwd">-->
+<!--                </div>-->
+<!--			</fieldset>-->
+
+            {{ form }}
+            <button type="submit" class="btn btn-primary">Zaloguj się</button>
+
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

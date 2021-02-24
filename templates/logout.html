@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<br/>
+<br/>
+<br/>
+
+<div class="row">
+	<div class="col-sm-6 col-sm-offset-3">
+		<h2>Zostałeś wylogowany!</h2>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-6 col-sm-offset-3">
+
+		<div class="boarder-top pt-3">
+			<small class="text-mutted">
+				<a href="{% url 'login' %}">Zaloguj się ponownie</a>
+			</small>
+		</div>
+
+	</div>
+</div>
+
+{% endblock content %}
