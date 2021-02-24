@@ -1,0 +1,71 @@
+<!Doctype html>
+
+<html>
+
+<head>
+
+	<title>
+	</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+	{% load static %}
+	{% block style %}{% endblock style %}
+
+</head>
+
+<body style="margin:0; overflow-x:hidden;">
+	<nav style="float:right; padding:30px;">
+		<ul style="display: flex;list-style:none;"
+			<li style="padding:10px;" class="">
+				{% if not request.user.is_authenticated %}
+					<button class="btn btn-default"><a href="{% url 'login' %}">zaloguj się</a></button>
+				{% else %}
+					<form method="POST" action="{% url 'logout' %}">
+						{% csrf_token %}
+						<button class="btn btn-default" type="submit">Wyloguj się</button>
+					</form>
+				{% endif %}
+			</li>
+		</ul>
+	</nav>
+
+	<div class="row">
+    	<div class="col-sm-6 col-sm-offset-3">
+			<h2>
+				<a href="{% url 'home' %}">Sprawdź geolokalizację na podstawie adresu url bądź IP</a>
+			</h2>
+			<br>
+			<br>
+			{% if request.user.is_authenticated %}
+				<h4>Witaj {{ request.user }}</h4>
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="row">
+    	<div class="col-sm-6 col-sm-offset-3">
+			{% if messages %}
+
+				{% for message in messages  %}
+					<div class="alert alert-{{ message.tags }}">
+						{{ message }}
+					</div>
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+
+	{% block content %}
+	{% endblock content %}
+
+	<script>
+		$(document).ready(function(){
+			{% block jquery %}{% endblock %}
+		})
+	</script>
+
+</body>
+
+</html>

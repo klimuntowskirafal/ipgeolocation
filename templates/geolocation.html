@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Sprawdź geolokalizację{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<br/>
+<br/>
+
+<div class="row">
+
+    <div class="col-sm-6 col-sm-offset-3">
+
+        <form class="border border-light p-5" method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Wprowadź adres IP lub URL i sprawdź geolokalizację" id="geolocation">
+                </div>
+                <small>Twój aktualny adres IP to: <b>{% if ip != '' %}{{ ip }}{% else %}Nie udało nam się zlokalizować Twojego IP{% endif %}</b></small>
+			</div>
+            <button type="submit" class="btn btn-primary">Sprawdź geolokalizację</button>
+            <br>
+            <small>*Zaloguj się by móc zapisać wyniki wyszykiwania geolokalizacji</small>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
