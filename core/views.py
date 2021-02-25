@@ -1,9 +1,11 @@
-from django.shortcuts import render
+import json
+import requests
+from django.http import JsonResponse
+from django.shortcuts import render, redirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-
-# Create your views here.
+from ipgeolocation.credentials import API_IPSTACK_KEY
 
 
 def get_ip(request):
@@ -19,11 +21,17 @@ def get_ip(request):
 
 
 def home(request):
-    ip = get_ip(request)
-    context = {
-        "ip": ip,
-    }
-    return render(request, "geolocation.html", context)
+    if request.method == "GET":
+        ip = get_ip(request)
+        context = {
+            "ip": ip,
+        }
+        return render(request, "geolocation.html", context)
+    if request.method == "POST":
+        ip_or_url = request.POST.get('ip_or_url')
+        geolocation_data = get_ip_info(ip_or_url)
+        data = json.loads(geolocation_data)
+        return JsonResponse(json.loads(geolocation_data))
 
 
 class Api(APIView):
@@ -37,3 +45,18 @@ class Api(APIView):
             "zip": 90013,
         }
         return Response(test_data)
+
+    def post(self, request, *args, **kwargs):
+        return redirect("/")
+
+
+def get_ip_info(ip_address):
+    api_access_key = API_IPSTACK_KEY
+    url = 'http://api.ipstack.com/{ip}?access_key={key}'.format(
+        ip=ip_address, key=api_access_key
+    )
+
+    headers = {'Content-Type': 'application/json'}
+    response = requests.get(url, headers)
+
+    return response.text
