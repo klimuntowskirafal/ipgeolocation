@@ -4,6 +4,7 @@ API - Check geolocation based on provided IP or URL adress. You can add, delete 
 Requeres authorisation via JWT
 
 endpoints:
+
 0. Contact me for username and password at klimuntowski.rafal@gmail.com
 1. ```/api/token``` - use login credentials to get ACCESS TOKEN
 2. ```/api/token/refresh``` - refresh expired token
