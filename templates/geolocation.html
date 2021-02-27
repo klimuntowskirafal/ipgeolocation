@@ -11,34 +11,30 @@
 
     <div class="col-sm-6 col-sm-offset-3">
 
-        <form class="border border-light p-5" method="POST">
-            {% csrf_token %}
+        <form class="border border-light p-5" method="GET" action="{% url 'ip-geolocation' %}">
 
             <div class="form-group">
                 <div class="form-group">
                   <input type="text" class="form-control"
-                         placeholder="Wprowadź adres IP lub URL i sprawdź geolokalizację"
+                         placeholder="Paste IP or URL address and get geolocation"
                          id="geolocation"
-                         name="ip_or_url"
+                         name="ip"
                   >
                 </div>
-                <small>Twój aktualny adres IP to:
+                <small>Your IP:
                     <b>
                         {% if ip != '' %}
                             {{ ip }}
                         {% else %}
-                            Nie udało nam się zlokalizować Twojego IP
+                            Can't find IP
                         {% endif %}
                     </b>
                 </small>
 			</div>
             <button type="submit" class="btn btn-primary">
-                Sprawdź geolokalizację
+                Check geolocation
             </button>
             <br>
-            <small>
-                *Zaloguj się by móc zapisać wyniki wyszykiwania geolokalizacji
-            </small>
 
         </form>
 
