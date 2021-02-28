@@ -16,31 +16,36 @@
 </head>
 
 <body style="margin:0; overflow-x:hidden;">
-	<nav style="float:right; padding:30px;">
-		<ul style="display: flex;list-style:none;"
-			<li style="padding:10px;" class="">
-				{% if not request.user.is_authenticated %}
-					<button class="btn btn-default"><a href="{% url 'login' %}">zaloguj się</a></button>
-				{% else %}
-					<form method="POST" action="{% url 'logout' %}">
-						{% csrf_token %}
-						<button class="btn btn-default" type="submit">Wyloguj się</button>
-					</form>
-				{% endif %}
-			</li>
-		</ul>
-	</nav>
+<!--	<nav style="float:right; padding:30px;">-->
+<!--		<ul style="display: flex;list-style:none;"-->
+<!--			<li style="padding:10px;" class="">-->
+<!--				{% if not request.user.is_authenticated %}-->
+<!--					<button class="btn btn-default"><a href="{% url 'login' %}">zaloguj się</a></button>-->
+<!--				{% else %}-->
+<!--					<form method="POST" action="{% url 'logout' %}">-->
+<!--						{% csrf_token %}-->
+<!--						<button class="btn btn-default" type="submit">Wyloguj się</button>-->
+<!--					</form>-->
+<!--				{% endif %}-->
+<!--			</li>-->
+<!--		</ul>-->
+<!--	</nav>-->
 
 	<div class="row">
-    	<div class="col-sm-6 col-sm-offset-3">
+    	<div class="col-sm-8 col-sm-offset-2">
 			<h2>
-				<a href="{% url 'home' %}">Sprawdź geolokalizację na podstawie adresu url bądź IP</a>
+				<a href="{% url 'home' %}">IP geolocation API</a>
 			</h2>
-			<br>
-			<br>
-			{% if request.user.is_authenticated %}
-				<h4>Witaj {{ request.user }}</h4>
-			{% endif %}
+			<hr>
+			<big>Your IP:
+				<b>
+					{% if ip != '' %}
+						{{ ip }}
+					{% else %}
+						Can't find IP
+					{% endif %}
+				</b>
+			</big>
 		</div>
 	</div>
 
