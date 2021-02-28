@@ -31,3 +31,5 @@ Install requirements:
 ```bash
 pip install -r requirements.txt
 ```
+
+Load dummy-data by running ```py manage.py loaddata core.ipdata```
