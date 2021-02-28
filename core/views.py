@@ -48,7 +48,11 @@ class IpGeolocationList(APIView):
         ip = request.GET.get('ip')
         if ip is not None and ip != '':
             geolocation_data = get_ip_info(ip)
-            return Response(geolocation_data)
+            # check for proper data returned from ipstack
+            if geolocation_data != '':
+                return Response(geolocation_data)
+            else:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
         else:
             qs = IpData.objects.all()
             serializer = IpDataSerializer(qs, many=True)
@@ -75,7 +79,10 @@ class IpGeolocationList(APIView):
         else:
             # get geolocation of new ip and save it
             geolocation_data = get_ip_info(ip)
-            return save_ip_geolocation(geolocation_data)
+            if geolocation_data != '':
+                return save_ip_geolocation(geolocation_data)
+            else:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class IpGeolocationDetails(APIView):
@@ -117,6 +124,20 @@ def get_ip_info(ip_address):
     )
 
     headers = {'Content-Type': 'application/json'}
+
     response = requests.get(url, headers)
 
-    return response.json()
+    data = response.json()
+
+    # check if returned response contains ip key
+    # otherwise return empty json
+    try:
+        if data['ip']:
+            return data
+    except:
+        data = ''
+        return data
+
+
+
+
