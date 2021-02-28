@@ -1,22 +1,44 @@
 import requests
-from django.http import JsonResponse, Http404
-from django.shortcuts import render, redirect
-from rest_framework import status
+from django.http import Http404
+from django.shortcuts import render
+from rest_framework import status, viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from ipgeolocation.credentials import API_IPSTACK_KEY
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from .models import IpData
 from .serializer import IpDataSerializer
 
 
+def get_ip(request):
+    """
+    get user ip
+    """
+    try:
+        x_forward = request.META.get("HTTP_X_FORWARDED_FOR")
+        if x_forward:
+            ip = x_forward.split(",")[0]
+        else:
+            ip = request.META.get("REMOTE_ADDR")
+    except:
+        ip = ""
+    return ip
+
+
+def home(request):
+    if request.method == "GET":
+        ip = get_ip(request)
+        context = {
+            "ip": ip,
+        }
+        return render(request, "geolocation.html", context)
+
+
 class IpGeolocationList(APIView):
     """
-    List all ip geolocation data, or create a new one.
-
-    To check geolocation for a specified ip or url:
+    List all ip geolocation data, create a new one,
+    or check geolocation for a specified ip or url by passing ip parameter in url like:
     '/api/ip-geolocation?ip={IP_OR_URL}'
     """
     # html styled form field to run POST on api
@@ -42,7 +64,7 @@ class IpGeolocationList(APIView):
         qs = IpData.objects.all()
         serializer = IpDataSerializer(qs, many=True)
 
-        ip = request.POST.get('ip')
+        ip = request.data.get('ip')
         ip_exists = IpData.objects.filter(ip=ip)
 
         if ip_exists:
@@ -53,7 +75,6 @@ class IpGeolocationList(APIView):
         else:
             # get geolocation of new ip and save it
             geolocation_data = get_ip_info(ip)
-            # return all records from db
             return save_ip_geolocation(geolocation_data)
 
 

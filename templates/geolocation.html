@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}Sprawdź geolokalizację{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<br/>
+<br/>
+
+<div class="row">
+
+    <div class="col-sm-8 col-sm-offset-2">
+        <h3>
+            <b>What is this project about?</b>
+        </h3>
+        <p>
+            Check geolocation based on provided IP or URL address.
+        </p>
+        <p>
+            You can check geolocation, add it or delete records to database.
+        </p>
+        <p>
+            Provided data is based on api/ipstack.com
+        </p>
+        <p>
+            Requires authorisation via JWT.
+        </p>
+        <p>
+            You can interract with the API only programmatically.
+        </p>
+        <p
+            On each request you need to explicitly provide the authentication credentials as well as Access Token.
+        </p>
+        <p>
+            Use tools like <POSTMAN></POSTMAN> or send your own request to the endpoints provided below to get acces to the API
+        </p>
+        <hr>
+
+        <h3>
+            <b>Endpoints:</b>
+        </h3>
+        <ul>
+            <li style="list-style:default">
+                <h4>/api/token</h4> send POST request with login credentials to get ACCESS TOKEN
+            </li>
+             <li>
+                 <h4>/api/token/refresh</h4> send POST request with refresh token to refresh your access token
+            </li>
+            <li>
+                <h4>/api/ip-geolocation ? ip = IP_OR_URL</h4> get geolocation for provided IP or URL - Token required
+            </li>
+            <li>
+                <h4>/api/ip-geolocation</h4> list all ip geolocation data, or create a new one - Token required
+            </li>
+            <li>
+                <h4>/api/ip-geolocation/{ip or id}</h4> retrieve or delete geolocation data for the specified ip - Token required
+            </li>
+        </ul>
+        <hr>
+
+        <h3>
+            <b>Login Credentials:</b>
+        </h3>
+        <p>
+            contact an author at: klimuntowski.rafal@gmail.com
+        </p>
+        <p>
+            linkedin:
+            <a href="https://www.linkedin.com/in/rafklimuntowski/" target="_blank">
+                www.linkedin.com/in/rafklimuntowski/
+            </a>
+        </p>
+
+        <hr>
+
+        <h3>
+            <b>GITHUB</b>
+        </h3>
+        <p>
+            <a href="https://github.com/klimuntowskirafal/ipgeolocation"
+               target="_blank">
+                https://github.com/klimuntowskirafal/ipgeolocation
+            </a>
+        </p>
+
+    </div>
+</div>
+
+{% endblock %}
