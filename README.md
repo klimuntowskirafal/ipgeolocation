@@ -32,4 +32,4 @@ Install requirements:
 pip install -r requirements.txt
 ```
 
-Load dummy-data by running ```py manage.py loaddata core.ipdata```
+Load dummy-data by running ```py manage.py loaddata ipdata.json```
