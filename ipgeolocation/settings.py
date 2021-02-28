@@ -29,7 +29,7 @@ DEBUG = os.environ.get("IPGEOLOCATION_PROD_DEBUG") == 'True'
 
 API_IPSTACK_KEY = os.environ.get("IPGEOLOCATION_PROD_API_IPSTACK_KEY")
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://geolocate-ip.herokuapp.com/']
 
 # Application definition
 
