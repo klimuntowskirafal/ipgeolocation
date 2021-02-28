@@ -1,7 +1,7 @@
-# ip geolocation api
+# free ip geolocation api - https://geolocate-ip.herokuapp.com/
 Check geolocation based on provided IP or URL adress. You can add, delete records to database. Provided data is based on ipstack.com API
 
-Requeres authorisation via JWT
+Requires authorisation via JWT
 
 You can interract with the API only programmatically. This means you have to use tools like POSTMAN, or send requests programmatically to the relative endpoints.
 On each request you need to explicitly provide Token authorisation (that you can acccess from one of the endpoints provided below).
