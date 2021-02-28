@@ -12,35 +12,6 @@ from .models import IpData
 from .serializer import IpDataSerializer
 
 
-def get_ip(request):
-    """
-    get user ip
-    """
-    try:
-        x_forward = request.META.get("HTTP_X_FORWARDED_FOR")
-        if x_forward:
-            ip = x_forward.split(",")[0]
-        else:
-            ip = request.META.get("REMOTE_ADDR")
-    except:
-        ip = ""
-    return ip
-
-
-def home(request):
-    if request.method == "GET":
-        ip = get_ip(request)
-        context = {
-            "ip": ip,
-        }
-        return render(request, "geolocation.html", context)
-
-    if request.method == "POST":
-        ip_or_url = request.POST.get('ip_or_url')
-        geolocation_data = get_ip_info(ip_or_url)
-        return JsonResponse(geolocation_data)
-
-
 class IpGeolocationList(APIView):
     """
     List all ip geolocation data, or create a new one.
@@ -88,7 +59,7 @@ class IpGeolocationList(APIView):
 
 class IpGeolocationDetails(APIView):
     """
-    Retrieve or delete an IpData instance.
+    Retrieve or delete an ip geolocation.
     """
     def get_object(self, ip):
         try:
