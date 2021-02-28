@@ -1,14 +1,14 @@
 import requests
 from django.http import Http404
 from django.shortcuts import render
-from rest_framework import status, viewsets
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from ipgeolocation.credentials import API_IPSTACK_KEY
-
 from .models import IpData
 from .serializer import IpDataSerializer
+
+from ipgeolocation.settings import API_IPSTACK_KEY
 
 
 def get_ip(request):
