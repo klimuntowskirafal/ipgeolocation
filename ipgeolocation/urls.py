@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.contrib.auth import views as auth_views
 from django.urls import path, include
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
@@ -18,18 +17,6 @@ urlpatterns = [
     path('api/ip-geolocation/<ip>',
          IpGeolocationDetails.as_view(),
          ),
-    path(
-        r"login/",
-        auth_views.LoginView.as_view(
-            template_name="login.html", redirect_authenticated_user=True,
-        ),
-        name="login",
-    ),
-    path(
-        r"logout/",
-        auth_views.LogoutView.as_view(template_name="logout.html"),
-        name="logout",
-    ),
     path('api/token', TokenObtainPairView.as_view()),
     path('api/token/refresh', TokenRefreshView.as_view()),
 ]
