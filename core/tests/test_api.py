@@ -13,7 +13,6 @@ class ApiFixture(TestCase):
     def test_get_on_root_returs_success(self):
         c = Client()
         self.assertEqual(200, c.get("/").status_code)
-        self.assertEqual({"hello": "world"}, c.get("/test_mat").json())
 
     def test_get_access_token(self):
         c = Client()
