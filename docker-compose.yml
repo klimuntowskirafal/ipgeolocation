@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    environment:
+#in production variable should be stored in .env that should be available in repository
+      - POSTGRES_DB=car_api
+      - POSTGRES_USER=car_api
+      - POSTGRES_PASSWORD=car_api123
+  web:
+    build: .
+    command: python /app/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+# env variablies can be automatically read from .env file in project root dir
+#      - SECRET_KEY=${SECRET_KEY}
+#      - DEBUG=${DEBUG}
+#      - API_IPSTACK_KEY=${API_IPSTACK_KEY}
+# for demonstration purposes use some defaults
+      - SECRET_KEY="6j8bgm=8$$tc^rt71e$$+v81au+t09&@p0j7fk3nctfq#4h#s)hq"
+      - DEBUG=True
+      - API_IPSTACK_KEY=406077b88c6d90eeda21b1a0ca12f6d8
