@@ -1,5 +1,4 @@
 from ipgeolocation.settings import *
-from ipgeolocation.credentials import SECRET, API_IPSTACK_KEY
 
 SECRET_KEY = 'CREATE_YOUR_OWN_SECRET'
 
