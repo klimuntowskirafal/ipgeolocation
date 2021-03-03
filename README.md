@@ -41,3 +41,8 @@ To run the project locally:
 To load dummy-data:
 
     py manage.py loaddata ipdata.json
+    
+Project is dockerized. You can run project on Docker:
+```
+docker-compose up
+```
