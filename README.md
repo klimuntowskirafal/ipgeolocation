@@ -33,7 +33,7 @@ pip install -r requirements.txt
 ```
 
 To run the project locally:
-* using local settings
+* using local settings - for full api functionality, get new api key from ipstack.com and override variable API_IPSTACK_KEY with new value
     ```bash
     py manage.py runserver --settings ipgeolocation.settings_local
     ```
