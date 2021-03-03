@@ -15,15 +15,11 @@ def get_ip(request):
     """
     get user ip
     """
-    try:
-        x_forward = request.META.get("HTTP_X_FORWARDED_FOR")
-        if x_forward:
-            ip = x_forward.split(",")[0]
-        else:
-            ip = request.META.get("REMOTE_ADDR")
-    except:
-        ip = ""
-    return ip
+    x_forward = request.META.get("HTTP_X_FORWARDED_FOR")
+    if x_forward is not None:
+        return x_forward.split(",")[0]
+    else:
+        return request.META.get("REMOTE_ADDR")
 
 
 def home(request):
@@ -64,7 +60,6 @@ class IpGeolocationList(APIView):
         get data from ipstack about ip and
         save ip geolocation to database
         """
-
         qs = IpData.objects.all()
         serializer = IpDataSerializer(qs, many=True)
 
@@ -131,12 +126,8 @@ def get_ip_info(ip_address):
 
     # check if returned response contains ip key
     # otherwise return empty json
-    try:
-        if data['ip']:
-            return data
-    except:
-        data = ''
-        return data
+    return data if data('ip') is not None else ""
+
 
 
 
