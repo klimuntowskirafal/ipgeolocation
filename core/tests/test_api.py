@@ -2,7 +2,6 @@ from django.test import TestCase, Client
 from django.contrib.auth.models import User
 
 
-# fikstura cos co grupuje testy
 class ApiFixture(TestCase):
     """
     call this function before every test case
