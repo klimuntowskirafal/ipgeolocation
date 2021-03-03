@@ -32,4 +32,12 @@ Install requirements:
 pip install -r requirements.txt
 ```
 
-Load dummy-data by running ```py manage.py loaddata ipdata.json```
+To run the project locally:
+* using local settings
+    ```bash
+    py manage.py runserver --settings ipgeolocation.settings_local
+    ```
+
+To load dummy-data by running:
+
+    ```py manage.py loaddata ipdata.json```
