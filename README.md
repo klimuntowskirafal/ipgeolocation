@@ -38,6 +38,6 @@ To run the project locally:
     py manage.py runserver --settings ipgeolocation.settings_local
     ```
 
-To load dummy-data by running:
+To load dummy-data:
 
-    ```py manage.py loaddata ipdata.json```
+    py manage.py loaddata ipdata.json
